@@ -28,7 +28,5 @@ public class Funcionario {
         return getRemuneração();
     }
 
-    public double getPagamento() {
-        return getPagamento();
-    }
+
 }

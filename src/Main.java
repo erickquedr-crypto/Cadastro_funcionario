@@ -9,7 +9,6 @@ public class Main {
         ArrayList<Funcionario> listaFuncionarios = new ArrayList<>();
 
 
-
         while (escolha != 0) {
             System.out.println("\nCadastro de Funcionario");
             System.out.println("Escolha uma das opções a seguir:");
@@ -55,8 +54,7 @@ public class Main {
 
                         Vendedor NovoFun = new Vendedor(nomeDigitado, salarioDigitado, idDigitado, bonusDigitado, comissaoDigitado);
                         listaFuncionarios.add(NovoFun);
-                    }
-                    else if(escolha2 == 2) {
+                    } else if (escolha2 == 2) {
 
                         System.out.print("Digite o setor do funcionario: ");
                         String setorDigitado = scanner.nextLine();
@@ -128,7 +126,7 @@ public class Main {
                             System.out.println("Remuneração: " + f.getRemuneração());
                         }
                     }
-                        break;
+                    break;
                 case 6:
                     System.out.print("Digite o ID do funcionario que deseja calcular a folha de pagamento: ");
                     System.out.println();
@@ -140,7 +138,8 @@ public class Main {
                         if (busca == f.getFuncionarioId()) {
 
                         }
-                    break;
+                        break;
+                    }
             }
         }
     }

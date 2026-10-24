@@ -16,7 +16,5 @@ public class Vendedor extends Funcionario {
         return getSalario() + (getSalario() * this.bonus / 100) + this.comissao;
     }
 
-    public double getPagamento() {
-        return ;
-    }
+
 }
