@@ -5,6 +5,9 @@ public class Main {
         int escolha = -1;
         int escolha2 = -1;
         int busca = 0;
+        int idDigitado = 0;
+        double salarioDigitado = 0;
+        boolean verificação = false;
         Scanner scanner = new Scanner(System.in);
         ArrayList<Funcionario> listaFuncionarios = new ArrayList<>();
 
@@ -25,30 +28,58 @@ public class Main {
 
             switch (escolha) {
                 case 1:
-                    System.out.println("\nQual o cargo desse funcionario?");
-                    System.out.println("1 - Vendedor");
-                    System.out.println("2 - Administrativo");
-                    System.out.print("Opção: ");
-                    escolha2 = scanner.nextInt();
+                    do {
+                        System.out.println("\nQual o cargo desse funcionario?");
+                        System.out.println("1 - Vendedor");
+                        System.out.println("2 - Administrativo");
+                        System.out.print("Opção: ");
+                        escolha2 = scanner.nextInt();
+                        if (escolha2 > 2 || escolha2 < 1) {
+                            System.out.println("Opção invalida");
+                        }
+                    } while (escolha2 < 1 || escolha2 > 2);
 
-                    System.out.print("Digite o ID do funcionario: ");
-                    int idDigitado = scanner.nextInt();
-                    scanner.nextLine();
+                    do {
+                        System.out.print("Digite o ID do funcionario: ");
+                        idDigitado = scanner.nextInt();
+                        scanner.nextLine();
+
+                        if (idDigitado < 0) {
+                            System.out.println("ID deve ser maior que zero.");
+                            verificação = false;
+                        } else {
+                            verificação = true;
+
+                            for (int i = 0; i < listaFuncionarios.size(); i++) {
+                                Funcionario f = listaFuncionarios.get(i);
+                                if (idDigitado == f.getFuncionarioId()) {
+                                    System.out.println("ID já está em uso por: " + listaFuncionarios.get(i));
+                                    verificação = false;
+                                }
+                            }
+                        }
+                    } while (verificação == false);
+
 
                     System.out.print("Digite o nome do funcionario: ");
                     String nomeDigitado = scanner.nextLine();
 
-                    System.out.print("Digite o salario do funcionario: ");
-                    double salarioDigitado = scanner.nextDouble();
-                    scanner.nextLine();
+                    do {
+                        System.out.print("Digite o salario do funcionario: R$");
+                        salarioDigitado = scanner.nextDouble();
+                        scanner.nextLine();
+                        if (salarioDigitado < 0) {
+                            System.out.println("Salário não pode ser negativo");
+                        }
+                    } while (salarioDigitado < 0);
 
                     if (escolha2 == 1) {
 
-                        System.out.print("Digite o bonus do funcionario: ");
+                        System.out.print("Digite o bonus do funcionario(%): ");
                         int bonusDigitado = scanner.nextInt();
                         scanner.nextLine();
 
-                        System.out.print("Digite a comissão do funcionario: ");
+                        System.out.print("Digite a comissão do funcionario: R$");
                         double comissaoDigitado = scanner.nextDouble();
                         scanner.nextLine();
 
@@ -59,12 +90,14 @@ public class Main {
                         System.out.print("Digite o setor do funcionario: ");
                         String setorDigitado = scanner.nextLine();
 
-                        System.out.print("Digite a gratificação do funcionario: ");
+                        System.out.print("Digite a gratificação do funcionario(%): ");
                         int gratificacaoDigitada = scanner.nextInt();
                         scanner.nextLine();
 
                         Administrativo NovoFunc = new Administrativo(nomeDigitado, salarioDigitado, idDigitado, setorDigitado, gratificacaoDigitada);
                         listaFuncionarios.add(NovoFunc);
+                    } else {
+                        System.out.println("Opção invalida");
                     }
                     break;
                 case 2:
@@ -136,11 +169,18 @@ public class Main {
                     for (int i = 0; i < listaFuncionarios.size(); i++) {
                         Funcionario f = listaFuncionarios.get(i);
                         if (busca == f.getFuncionarioId()) {
-
+                            System.out.println(listaFuncionarios.get(i));
+                            System.out.println(f.getFolha());
                         }
+                    }
                         break;
+                case 0:
+                    System.out.println("Saindo do sistema...");
+                    break;
+                        default:
+                            System.out.println("Opção invalida");
+                            break;
                     }
             }
         }
     }
-}
